@@ -1,7 +1,11 @@
-import './App.css';
+import Photos from './Photos';
 
 function App() {
-  return (null)
+  return(
+    <div>
+      <Photos/>
+    </div>
+  ) 
 }
 
 export default App;
