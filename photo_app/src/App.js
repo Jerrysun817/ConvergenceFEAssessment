@@ -1,11 +1,13 @@
 import Photos from './Photos';
 
 function App() {
-  return(
+
+
+  return (
     <div>
-      <Photos/>
+      <Photos />
     </div>
-  ) 
+  )
 }
 
 export default App;
