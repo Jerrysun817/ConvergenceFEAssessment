@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Photos.css'
-import { CCarouselItem } from '@coreui/react'
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { CCarouselItem } from '@coreui/react';
 
 function Photos() {
 
@@ -49,17 +51,19 @@ function Photos() {
   };
 
   return (
-    <>
-      <div className='container'>
+    <div>
+      <Carousel showArrows={true} infiniteLoop={true} showIndicators={false} swipeable={true} showThumbs={false} centerMode={true} centerSlidePercentage={50}>
         {photos.map(photo => (
-          <div key={photo.id} className='photo_container'>
-            <img src={photo.url} alt={photo.title} />
-            <p>{photo.title}</p>
-          </div>
+          <CCarouselItem key={photo.id}>
+            <div className='photo_container'>
+              <img src={photo.url} alt={photo.title} />
+              <p>{photo.title}{photo.id}</p>
+            </div>
+          </CCarouselItem>
         ))}
-      </div>
+      </Carousel>
       <button className='shuffle_button' onClick={shufflePhotos}>Press To Reorder Photos</button>
-    </>
+    </div>
 
     //change to scroll menu
   );
