@@ -9,6 +9,7 @@
     position: relative;
 }
 
+/* rotate title diagonally */
 .photo_container p {
     position: absolute;
     text-align: center;
@@ -19,6 +20,14 @@
     font-size: 30px;
     transform: translate(-50%, -50%) rotate(-45deg);
     width: 100%;
+
+}
+
+/* dropdown shadow with rounded border */
+.photo_container img {
+    border-radius: 15px;
+    border: 5px solid black;
+    filter: drop-shadow(.5rem .5rem 1rem grey);
 }
 
 .shuffle_button {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Photos.css'
-import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
+import { CCarouselItem } from '@coreui/react'
 
 function Photos() {
 
@@ -49,7 +49,7 @@ function Photos() {
   };
 
   return (
-    <div>
+    <>
       <div className='container'>
         {photos.map(photo => (
           <div key={photo.id} className='photo_container'>
@@ -59,7 +59,7 @@ function Photos() {
         ))}
       </div>
       <button className='shuffle_button' onClick={shufflePhotos}>Press To Reorder Photos</button>
-    </div>
+    </>
 
     //change to scroll menu
   );
