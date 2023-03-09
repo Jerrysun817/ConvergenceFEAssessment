@@ -56,16 +56,24 @@ function Photos() {
   };
 
   const nextPhoto = () => {
-    setCurrentIndex(currentIndex === photos.length - 1 ? 0 : currentIndex + 1);
+    document.querySelector('.container').classList.add('next');
+    setTimeout(() => {
+      setCurrentIndex(currentIndex === photos.length - 1 ? 0 : currentIndex + 1);
+      document.querySelector('.container').classList.remove('next');
+    }, 1000);
   }
-
+  
   const prevPhoto = () => {
-    setCurrentIndex(currentIndex === 0 ? photos.length - 1 : currentIndex - 1);
+    document.querySelector('.container').classList.add('prev');
+    setTimeout(() => {
+      setCurrentIndex(currentIndex === 0 ? photos.length - 1 : currentIndex - 1);
+      document.querySelector('.container').classList.remove('prev');
+    }, 1000);
   }
 
   const nextIndex = (index) => {
     if (index === photos.length - 1) {
-      return 0;
+      return index;
     }
     return index + 1;
   }
