@@ -8,8 +8,8 @@
 }
 
 .photo_container {
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: auto;
     position: relative;
     margin-right: 10px;
 }
@@ -30,30 +30,73 @@
 
 /* dropdown shadow with rounded border */
 .photo_container img {
+
     border-radius: 15px;
     border: 5px solid black;
     filter: drop-shadow(.5rem .5rem 1rem grey);
 }
 
-.shuffle_button {
-    background-color: greenyellow;
-    display: block;
-    margin: auto;
-    text-align: center;
-    font-size: 20px;
-    border-radius: 15px;
+.button {
     border: none;
     padding: 10px;
     cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.shuffle_button {
+    background-color: greenyellow;
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 15px;
     margin: auto;
 }
 
 .shuffle_button:hover {
     color: white;
     background-color: green;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .carousel_buttons {
-    display: flex;
-    justify-content: center;
-  }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.prev_button {
+    font-size: 40px;
+    font-weight: 800;
+    background-color: transparent;
+    padding-top: 40%;
+    padding-bottom: 40%;    
+    border-radius: 15px;
+}
+
+.prev_button:hover {
+    background-color: rgba(67, 67, 67, 0.2);
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+
+.next_button {
+    font-size: 40px;
+    font-weight: 800;
+    background-color: transparent;
+    margin-left: 84%;
+    padding-top: 40%;
+    padding-bottom: 40%;   
+    border-radius: 15px;
+
+}
+
+.next_button:hover {
+    background-color: rgba(67, 67, 67, 0.2);
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+

@@ -63,21 +63,52 @@ function Photos() {
     setCurrentIndex(currentIndex === 0 ? photos.length - 1 : currentIndex - 1);
   }
 
+  const nextIndex = (index) => {
+    if (index === photos.length - 1) {
+      return 0;
+    }
+    return index + 1;
+  }
+
   const renderContent = (
     <>
       <div className='container'>
-        {photos.slice(currentIndex, currentIndex + 5).map(photo => (
-          <div key={photo.id} className='photo_container'>
+        {photos.slice(currentIndex, nextIndex(currentIndex)).map(photo => (
+          <div key={photo.id} className='photo_container' id='left'>
             <img src={photo.url} alt={photo.title} />
-            <p>{photo.title}</p>
+            <p>{photo.title}{photo.id}</p>
+          </div>
+        ))}
+        {photos.slice(nextIndex(currentIndex), nextIndex(nextIndex(currentIndex))).map(photo => (
+          <div key={photo.id} className='photo_container' id='midleft'>
+            <img src={photo.url} alt={photo.title} />
+            <p>{photo.title}{photo.id}</p>
+          </div>
+        ))}
+        {photos.slice(nextIndex(nextIndex(currentIndex)), nextIndex(nextIndex(nextIndex(currentIndex)))).map(photo => (
+          <div key={photo.id} className='photo_container' id='mid'>
+            <img src={photo.url} alt={photo.title} />
+            <p>{photo.title}{photo.id}</p>
+            <div className='carousel_buttons'>
+              <button className='prev_button button' onClick={prevPhoto}>&#60;</button>
+              <button className='next_button button' onClick={nextPhoto}>&#62;</button>
+            </div>
+          </div>
+        ))}
+        {photos.slice(nextIndex(nextIndex(nextIndex(currentIndex))), nextIndex(nextIndex(nextIndex(nextIndex(currentIndex))))).map(photo => (
+          <div key={photo.id} className='photo_container' id='midright'>
+            <img src={photo.url} alt={photo.title} />
+            <p>{photo.title}{photo.id}</p>
+          </div>
+        ))}
+        {photos.slice(nextIndex(nextIndex(nextIndex(nextIndex(currentIndex)))), nextIndex(nextIndex(nextIndex(nextIndex(nextIndex(currentIndex)))))).map(photo => (
+          <div key={photo.id} className='photo_container' id='right'>
+            <img src={photo.url} alt={photo.title} />
+            <p>{photo.title}{photo.id}</p>
           </div>
         ))}
       </div>
-      <div className='carousel_buttons'>
-        <button className='prev_button' onClick={prevPhoto}>Prev</button>
-        <button className='next_button' onClick={nextPhoto}>Next</button>
-      </div>
-      <button className='shuffle_button' onClick={shufflePhotos}>Press To Reorder Photos</button>
+      <button className='shuffle_button button' onClick={shufflePhotos}>Press To Reorder Photos</button>
     </>
   );
 
