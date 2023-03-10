@@ -97,7 +97,6 @@ function Photos() {
     return index + 1;
   }
 
-
   const renderContent = (
     <>
       <div className='container'>
@@ -129,11 +128,11 @@ function Photos() {
             <p>{photo.title}{photo.id}</p>
           </div>
         ))}
-        {photos.slice(nextIndex(nextIndex(nextIndex(nextIndex(currentIndex)))), nextIndex(nextIndex(nextIndex(nextIndex(currentIndex))))+1).map(photo => (
-        <div key={photo.id} className='photo_container' id='right'>
-          <img src={photo.url} alt={photo.title} />
-          <p>{photo.title}{photo.id}</p>
-        </div>
+        {photos.slice(nextIndex(nextIndex(nextIndex(nextIndex(currentIndex)))), nextIndex(nextIndex(nextIndex(nextIndex(currentIndex)))) + 1).map(photo => (
+          <div key={photo.id} className='photo_container' id='right'>
+            <img src={photo.url} alt={photo.title} />
+            <p>{photo.title}{photo.id}</p>
+          </div>
         ))}
       </div>
       <button className='shuffle_button button' onClick={shufflePhotos}>Reorder</button>
