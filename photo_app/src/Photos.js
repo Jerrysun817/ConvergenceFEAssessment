@@ -34,14 +34,16 @@ function Photos() {
     const handleKeyPress = (event) => {
       // check if r is pressed 
       if (event.key === "r") {
+        window.alert('LocalStorage Cleared');
         clearLocalStorage();
       }
     };
-    window.addEventListener('checkkeydown', handleKeyPress);
+
+    window.addEventListener('keydown', handleKeyPress);
 
     // cleanup function to remove event listener
     return () => {
-      window.removeEventListener('checkkeydown', handleKeyPress);
+      window.removeEventListener('keydown', handleKeyPress);
     };
   }, []);
 
@@ -109,19 +111,19 @@ function Photos() {
         {photos.slice(currentIndex, currentIndex + 1).map(photo => (
           <div key={photo.id} className='photo_container' id='left'>
             <img src={photo.url} alt={photo.title} />
-            <p>{photo.title}{photo.id}</p>
+            <p>{photo.title}</p>
           </div>
         ))}
         {photos.slice(nextIndex(currentIndex), nextIndex(currentIndex) + 1).map(photo => (
           <div key={photo.id} className='photo_container' id='midleft'>
             <img src={photo.url} alt={photo.title} />
-            <p>{photo.title}{photo.id}</p>
+            <p>{photo.title}</p>
           </div>
         ))}
         {photos.slice(nextIndex(nextIndex(currentIndex)), nextIndex(nextIndex(currentIndex)) + 1).map(photo => (
           <div key={photo.id} className='photo_container' id='mid'>
             <img src={photo.url} alt={photo.title} />
-            <p>{photo.title}{photo.id}</p>
+            <p>{photo.title}</p>
             <div className='carousel_buttons'>
               <button className='prev_button button' onClick={prevPhoto}>&#60;</button>
               <button className='next_button button' onClick={nextPhoto}>&#62;</button>
@@ -131,13 +133,13 @@ function Photos() {
         {photos.slice(nextIndex(nextIndex(nextIndex(currentIndex))), nextIndex(nextIndex(nextIndex(currentIndex))) + 1).map(photo => (
           <div key={photo.id} className='photo_container' id='midright'>
             <img src={photo.url} alt={photo.title} />
-            <p>{photo.title}{photo.id}</p>
+            <p>{photo.title}</p>
           </div>
         ))}
         {photos.slice(nextIndex(nextIndex(nextIndex(nextIndex(currentIndex)))), nextIndex(nextIndex(nextIndex(nextIndex(currentIndex)))) + 1).map(photo => (
           <div key={photo.id} className='photo_container' id='right'>
             <img src={photo.url} alt={photo.title} />
-            <p>{photo.title}{photo.id}</p>
+            <p>{photo.title}</p>
           </div>
         ))}
       </div>
