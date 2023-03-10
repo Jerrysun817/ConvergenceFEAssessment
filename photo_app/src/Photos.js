@@ -14,10 +14,12 @@ function Photos() {
     //check if the photos are already cached
     if (cachedData) {
       //parse the cached data and set state variable to cached photos
+      console.log("loading from local storage");
       setPhotos(JSON.parse(cachedData));
       setLoading(false);
     } else {
       //fetch freom API
+      console.log("fetching Photos");
       fetch('https://jsonplaceholder.typicode.com/photos')
         .then(response => response.json())
         .then(data => {
@@ -28,7 +30,24 @@ function Photos() {
         })
         .catch(error => console.log(error));
     }
+
+    const handleKeyPress = (event) => {
+      if (event.key === "r") {
+        clearLocalStorage();
+      }
+    };
+    window.addEventListener('checkkeydown', handleKeyPress);
+
+    // cleanup function to remove event listener
+    return () => {
+      window.removeEventListener('checkkeydown', handleKeyPress);
+    };
   }, []);
+
+  const clearLocalStorage = () => {
+    console.log("localStorage cleared");
+    localStorage.clear();
+  }
 
   // recursive function to shuffle photos
   const recurShuffle = (arr) => {
@@ -58,42 +77,43 @@ function Photos() {
   const nextPhoto = () => {
     document.querySelector('.container').classList.add('next');
     setTimeout(() => {
-      setCurrentIndex(currentIndex === photos.length - 1 ? 0 : currentIndex + 1);
       document.querySelector('.container').classList.remove('next');
+      setCurrentIndex(currentIndex === photos.length - 1 ? 0 : currentIndex + 1);
     }, 1000);
   }
-  
+
   const prevPhoto = () => {
     document.querySelector('.container').classList.add('prev');
     setTimeout(() => {
-      setCurrentIndex(currentIndex === 0 ? photos.length - 1 : currentIndex - 1);
       document.querySelector('.container').classList.remove('prev');
+      setCurrentIndex(currentIndex === 0 ? photos.length - 1 : currentIndex - 1);
     }, 1000);
   }
 
   const nextIndex = (index) => {
     if (index === photos.length - 1) {
-      return index;
+      return 0;
     }
     return index + 1;
   }
 
+
   const renderContent = (
     <>
       <div className='container'>
-        {photos.slice(currentIndex, nextIndex(currentIndex)).map(photo => (
+        {photos.slice(currentIndex, currentIndex + 1).map(photo => (
           <div key={photo.id} className='photo_container' id='left'>
             <img src={photo.url} alt={photo.title} />
             <p>{photo.title}{photo.id}</p>
           </div>
         ))}
-        {photos.slice(nextIndex(currentIndex), nextIndex(nextIndex(currentIndex))).map(photo => (
+        {photos.slice(nextIndex(currentIndex), nextIndex(currentIndex) + 1).map(photo => (
           <div key={photo.id} className='photo_container' id='midleft'>
             <img src={photo.url} alt={photo.title} />
             <p>{photo.title}{photo.id}</p>
           </div>
         ))}
-        {photos.slice(nextIndex(nextIndex(currentIndex)), nextIndex(nextIndex(nextIndex(currentIndex)))).map(photo => (
+        {photos.slice(nextIndex(nextIndex(currentIndex)), nextIndex(nextIndex(currentIndex)) + 1).map(photo => (
           <div key={photo.id} className='photo_container' id='mid'>
             <img src={photo.url} alt={photo.title} />
             <p>{photo.title}{photo.id}</p>
@@ -103,20 +123,20 @@ function Photos() {
             </div>
           </div>
         ))}
-        {photos.slice(nextIndex(nextIndex(nextIndex(currentIndex))), nextIndex(nextIndex(nextIndex(nextIndex(currentIndex))))).map(photo => (
+        {photos.slice(nextIndex(nextIndex(nextIndex(currentIndex))), nextIndex(nextIndex(nextIndex(currentIndex))) + 1).map(photo => (
           <div key={photo.id} className='photo_container' id='midright'>
             <img src={photo.url} alt={photo.title} />
             <p>{photo.title}{photo.id}</p>
           </div>
         ))}
-        {photos.slice(nextIndex(nextIndex(nextIndex(nextIndex(currentIndex)))), nextIndex(nextIndex(nextIndex(nextIndex(nextIndex(currentIndex)))))).map(photo => (
-          <div key={photo.id} className='photo_container' id='right'>
-            <img src={photo.url} alt={photo.title} />
-            <p>{photo.title}{photo.id}</p>
-          </div>
+        {photos.slice(nextIndex(nextIndex(nextIndex(nextIndex(currentIndex)))), nextIndex(nextIndex(nextIndex(nextIndex(currentIndex))))+1).map(photo => (
+        <div key={photo.id} className='photo_container' id='right'>
+          <img src={photo.url} alt={photo.title} />
+          <p>{photo.title}{photo.id}</p>
+        </div>
         ))}
       </div>
-      <button className='shuffle_button button' onClick={shufflePhotos}>Press To Reorder Photos</button>
+      <button className='shuffle_button button' onClick={shufflePhotos}>Reorder</button>
     </>
   );
 
