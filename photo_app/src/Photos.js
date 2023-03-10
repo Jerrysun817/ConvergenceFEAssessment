@@ -32,6 +32,7 @@ function Photos() {
     }
 
     const handleKeyPress = (event) => {
+      // check if r is pressed 
       if (event.key === "r") {
         clearLocalStorage();
       }
@@ -75,21 +76,26 @@ function Photos() {
   };
 
   const nextPhoto = () => {
+    //start animation
     document.querySelector('.container').classList.add('next');
     setTimeout(() => {
+      //end animation and swap photos
       document.querySelector('.container').classList.remove('next');
       setCurrentIndex(currentIndex === photos.length - 1 ? 0 : currentIndex + 1);
     }, 1000);
   }
 
   const prevPhoto = () => {
+    //start animation
     document.querySelector('.container').classList.add('prev');
     setTimeout(() => {
+      //end animation and swap photos
       document.querySelector('.container').classList.remove('prev');
       setCurrentIndex(currentIndex === 0 ? photos.length - 1 : currentIndex - 1);
     }, 1000);
   }
 
+  //calculate the nextIndex that will be used in when using the slice function
   const nextIndex = (index) => {
     if (index === photos.length - 1) {
       return 0;
