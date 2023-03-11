@@ -16,7 +16,10 @@ function Photos() {
       //parse the cached data and set state variable to cached photos
       console.log("loading from local storage");
       setPhotos(JSON.parse(cachedData));
-      setLoading(false);
+      setTimeout(()=>{
+          setLoading(false);
+      },2000);
+      
     } else {
       //fetch freom API
       console.log("fetching Photos");
@@ -24,9 +27,17 @@ function Photos() {
         .then(response => response.json())
         .then(data => {
           setPhotos(data);
-          setLoading(false);
+          setTimeout(()=>{
+            setLoading(false);
+        },2000);
           //store the feched photos to localStorage
           localStorage.setItem('photos', JSON.stringify(data));
+
+          data.forEach(photo => {
+            //preloading to local cache
+            const img = new Image();
+            img.src = photo.url;
+          });
         })
         .catch(error => console.log(error));
     }
@@ -82,20 +93,30 @@ function Photos() {
     document.querySelector('.container').classList.add('next');
     setTimeout(() => {
       //end animation and swap photos
-      document.querySelector('.container').classList.remove('next');
-      setCurrentIndex(currentIndex === photos.length - 1 ? 0 : currentIndex + 1);
+      const newIndex = currentIndex === photos.length - 1 ? 0 : currentIndex + 1;
+      const img = new Image();
+      img.src = photos[newIndex].url;
+      img.onload = () => {
+        document.querySelector('.container').classList.remove('next');
+        setCurrentIndex(newIndex);
+      };
     }, 1000);
-  }
+  };
 
   const prevPhoto = () => {
     //start animation
     document.querySelector('.container').classList.add('prev');
     setTimeout(() => {
       //end animation and swap photos
-      document.querySelector('.container').classList.remove('prev');
-      setCurrentIndex(currentIndex === 0 ? photos.length - 1 : currentIndex - 1);
+      const newIndex = currentIndex === 0 ? photos.length - 1 : currentIndex - 1;
+      const img = new Image();
+      img.src = photos[newIndex].url;
+      img.onload = () => {
+        document.querySelector('.container').classList.remove('prev');
+        setCurrentIndex(newIndex);
+      };
     }, 1000);
-  }
+  };
 
   //calculate the nextIndex that will be used in when using the slice function
   const nextIndex = (index) => {
