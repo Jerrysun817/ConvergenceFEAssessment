@@ -16,10 +16,10 @@ function Photos() {
       //parse the cached data and set state variable to cached photos
       console.log("loading from local storage");
       setPhotos(JSON.parse(cachedData));
-      setTimeout(()=>{
-          setLoading(false);
-      },2000);
-      
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+
     } else {
       //fetch freom API
       console.log("fetching Photos");
@@ -27,9 +27,9 @@ function Photos() {
         .then(response => response.json())
         .then(data => {
           setPhotos(data);
-          setTimeout(()=>{
+          setTimeout(() => {
             setLoading(false);
-        },2000);
+          }, 2000);
           //store the feched photos to localStorage
           localStorage.setItem('photos', JSON.stringify(data));
 
